@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CChessBoardView: UIView {
+class CChessBoardView: UIView,UIAlertViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -109,6 +109,35 @@ class CChessBoardView: UIView {
         let rightRect = CGRectMake(padding + width / 2, padding + rowHeight * 4 + (rowHeight - textHeight) / 2, width / 2, rowHeight)
         
         text.drawInRect(rightRect, withAttributes: tempDict)
+        
+        //the re-start button
+        let reBtn = UIButton(frame: CGRectMake(padding, padding + rowHeight * 10 , width / 7, rowHeight/2))
+        reBtn.setTitle("再來一盤", forState: UIControlState.Normal)
+        reBtn.backgroundColor=UIColor(red: 220/255, green: 238.0/255, blue: 221.0/255, alpha: 1)
+        reBtn.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
+        reBtn.layer.cornerRadius = 20
+        reBtn.layer.masksToBounds = true
+        reBtn.addTarget(self, action: "clickReBtn:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.addSubview(reBtn)
+    }
+    
+    func clickReBtn(sender:UIButton){
+        var alert = UIAlertView(title: "", message: "是否再來一局？", delegate: nil, cancelButtonTitle: "取消", otherButtonTitles: "確定")
+        alert.show()
+        alert.delegate = self
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex == 1 {
+            for var i=subviews.count-1; i>=0; i-- {
+                (self.subviews[i] as UIView).removeFromSuperview()
+            }
+            self.game?.newGame()
+            self.addChesses(game!.redChesses)
+            self.addChesses(game!.blackChesses)
+            
+            self.game!.startGame()
+        }
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
