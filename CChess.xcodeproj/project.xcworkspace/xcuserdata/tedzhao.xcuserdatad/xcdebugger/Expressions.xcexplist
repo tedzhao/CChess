@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "CChess.CChessGame.canMoveChessTo (CChess.CChessGame)(CChess.CChessChess, target : CChess.CChessPosition) -&gt; (canMove : Swift.Bool, eatChess : Swift.Optional&lt;CChess.CChessChess&gt;):CChessGame.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "chess.role">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
